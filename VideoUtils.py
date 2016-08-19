@@ -28,6 +28,35 @@ def extract_video_clip(input_video_filename,
 
 
 
+def extract_videos_clips(input_list_videos,
+                         out_video_clip_filename):
+    count_i = 0
+
+    for input_video_slot in input_list_videos:
+        video_name = input_video_slot[0]
+        video_start = input_video_slot[1]
+        video_end = input_video_slot[2]
+
+        count_s = str(count_i)
+        while len(count_s) < 3:
+            count_s = "0" + count_s
+
+        count_s = count_s + "0"
+
+        out_this_clip_filename = out_video_clip_filename
+        out_this_clip_filename = out_this_clip_filename.replace("%NUMERATION%", count_s)
+        out_this_clip_filename = out_this_clip_filename.replace("%INPUT_FILENAME%",
+                                                                video_name.replace("videos/", ""))
+        extract_video_clip(video_name,
+                           video_start,
+                           video_end,
+                           out_this_clip_filename)
+        count_i += 1
+
+
+
+
+
 
 def get_list_of_videos_filenames_of(path):
     myPath = path
