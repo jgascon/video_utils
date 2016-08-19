@@ -31,6 +31,7 @@ def extract_video_clip(input_video_filename,
 def extract_videos_clips(input_list_videos,
                          out_video_clip_filename):
     count_i = 0
+    out_videos_clips_filenames = []
 
     for input_video_slot in input_list_videos:
         video_name = input_video_slot[0]
@@ -51,8 +52,9 @@ def extract_videos_clips(input_list_videos,
                            video_start,
                            video_end,
                            out_this_clip_filename)
+        out_videos_clips_filenames += [out_this_clip_filename]
         count_i += 1
-
+    return out_videos_clips_filenames
 
 
 
@@ -86,6 +88,8 @@ def concatenate_videos(input_list_videos_filenames,
     for video_filename in input_list_videos_filenames:
         f.write("file '" + video_filename + "'\n");
     f.close()
+
+    print ("concatenate_videos --> joining " + str(len(input_list_videos_filenames)) + " videos.\n")
 
     command = "optirun ffmpeg -loglevel panic " +\
                             " -f concat -i " + CONCAT_LIST_FILENAME +\

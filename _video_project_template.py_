@@ -6,8 +6,10 @@ import VideoUtils as vu
 %LIST_OF_VIDEOS_CLIPS%
 
 
-videos_clips_filenames = vu.extract_videos_clips(videos_clips,
-						                         "temp_clips/%NUMERATION%-%INPUT_FILENAME%")
+vu.extract_videos_clips(videos_clips,
+                        "temp_clips/%NUMERATION%-%INPUT_FILENAME%")
+
+videos_clips_filenames = vu.get_list_of_videos_filenames_of("temp_clips/")
 
 vu.concatenate_videos(videos_clips_filenames,
                       "finals/%PROJECT_NAME%_no_sound.mp4")
@@ -16,3 +18,5 @@ vu.concatenate_videos(videos_clips_filenames,
 vu.insert_audio_to_video("finals/%PROJECT_NAME%_no_sound.mp4",
                          "sounds/%PROJECT_NAME%.mp3",
                          "finals/%PROJECT_NAME%.mp4")
+
+print("Finishing.\n")
